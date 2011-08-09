@@ -7,33 +7,18 @@ namespace TaskRunner
     {
         public Type TaskType { get; private set; }
         public string Description { get; private set; }
+        public string Name { get; private set; }
 
-        public bool HasDescription
-        {
-            get { return !String.IsNullOrWhiteSpace(Description); }
-        }
-
-        public string Name
-        {
-            get { return TaskType.Name; }
-        }
-
-        public TaskInformation(Type taskType)
+        public TaskInformation(Type taskType, string description)
         {
             TaskType = taskType;
-
-            GetDescription();
-        }
-
-        private void GetDescription()
-        {
-            var attributes = TaskType.GetCustomAttributes(true).Where(a => a is TaskDescriptionAttribute).FirstOrDefault() as TaskDescriptionAttribute;
-            Description = attributes == null ? String.Empty : attributes.Description;
+            Description = description;
+            Name = taskType.Name;
         }
 
         public override string ToString()
         {
-            if(HasDescription)
+            if(!String.IsNullOrWhiteSpace(Description))
             {
                 return String.Format("{0} ({1})", Name, Description);
             }
