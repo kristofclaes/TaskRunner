@@ -25,5 +25,20 @@ namespace TaskRunner
             
             return Name;
         }
+
+        public override bool Equals(object obj)
+        {
+            var other = obj as TaskInformation;
+            if(other == null)
+            {
+                return false;
+            }
+            return TaskType.Equals(other.TaskType);
+        }
+
+        public override int GetHashCode()
+        {
+            return TaskType.GetHashCode();
+        }
     }
 }
