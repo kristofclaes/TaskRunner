@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Reflection;
 
 namespace TaskRunner
@@ -17,11 +14,6 @@ namespace TaskRunner
         public void Go()
         {
             SayHello();
-        }
-
-        public void RunTask(string name)
-        {
-            taskLibrary.RunTask(name);
         }
 
         private void SayHello()
@@ -47,21 +39,14 @@ namespace TaskRunner
                 Console.WriteLine("The following commands are available: ");
                 foreach(var ti in taskLibrary.Tasks())
                 {
-                    if (ti.HasDescription)
-                    {
-                        Console.WriteLine(" - {0} ({1})", ti.Name, ti.Description);
-                    }
-                    else
-                    {
-                        Console.WriteLine(" - {0}", ti.Name);
-                    }
+                    Console.WriteLine(" - {0}", ti);
                 }
             }
             else
             {
                 try
                 {
-                    RunTask(command);
+                    taskLibrary.RunTask(command);
                 }
                 catch (Exception e)
                 {

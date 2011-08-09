@@ -12,7 +12,7 @@ namespace TaskRunner
 
         public TaskLibrary()
         {
-            tasks = (from t in Assembly.GetCallingAssembly().GetTypes()
+            tasks = (from t in Assembly.GetEntryAssembly().GetTypes()
                      where typeof (ITask).IsAssignableFrom(t)
                      select new TaskInformation(t)).ToList();
         }
