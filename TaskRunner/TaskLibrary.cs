@@ -5,10 +5,10 @@ using System.Linq;
 
 namespace TaskRunner
 {
-    internal class TaskLibrary
+    internal class TaskLibrary : ITaskLibrary
     {
         private readonly List<TaskInformation> tasks;
-        private readonly TaskLoader taskLoader;
+        private readonly ITaskLoader taskLoader;
 
         public TaskLibrary()
         {

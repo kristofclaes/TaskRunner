@@ -41,6 +41,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ITask.cs" />
+    <Compile Include="ITaskLibrary.cs" />
+    <Compile Include="ITaskLoader.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TaskLoader.cs" />
     <Compile Include="Runner.cs" />

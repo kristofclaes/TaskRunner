@@ -5,7 +5,7 @@ using System.Reflection;
 
 namespace TaskRunner
 {
-    internal class TaskLoader
+    internal class TaskLoader : ITaskLoader
     {
          public List<TaskInformation> FindTasks()
          {

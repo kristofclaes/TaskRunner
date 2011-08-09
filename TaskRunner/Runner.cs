@@ -5,7 +5,7 @@ namespace TaskRunner
 {
     public class Runner
     {
-        private readonly TaskLibrary taskLibrary;
+        private readonly ITaskLibrary taskLibrary;
         public Runner()
         {
             taskLibrary = new TaskLibrary();
