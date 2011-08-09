@@ -2,19 +2,18 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reflection;
 
 namespace TaskRunner
 {
     internal class TaskLibrary
     {
-        private readonly List<TaskInformation> tasks; 
+        private readonly List<TaskInformation> tasks;
+        private readonly TaskLoader taskLoader;
 
         public TaskLibrary()
         {
-            tasks = (from t in Assembly.GetEntryAssembly().GetTypes()
-                     where typeof (ITask).IsAssignableFrom(t)
-                     select new TaskInformation(t)).ToList();
+            taskLoader = new TaskLoader();
+            tasks = taskLoader.FindTasks();
         }
 
         public void RunTask(string name)
