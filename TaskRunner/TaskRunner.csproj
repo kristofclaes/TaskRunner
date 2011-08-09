@@ -45,6 +45,7 @@
     <Compile Include="Runner.cs" />
     <Compile Include="TaskDescriptionAttribute.cs" />
     <Compile Include="TaskInformation.cs" />
+    <Compile Include="TaskLibrary.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -8,13 +8,10 @@ namespace TaskRunner
 {
     public class Runner
     {
-        private readonly Dictionary<string, TaskInformation> tasks;
-
+        private readonly TaskLibrary taskLibrary;
         public Runner()
         {
-            tasks = (from t in Assembly.GetCallingAssembly().GetTypes()
-                                 where typeof (ITask).IsAssignableFrom(t)
-                                 select t).ToDictionary(x => x.Name.ToLower(), x => new TaskInformation(x));
+            taskLibrary = new TaskLibrary();
         }
 
         public void Go()
@@ -24,13 +21,7 @@ namespace TaskRunner
 
         public void RunTask(string name)
         {
-            if(tasks.ContainsKey(name.ToLower()))
-            {
-                using (var instance = Activator.CreateInstance(tasks[name].TaskType) as ITask)
-                {
-                    if(instance != null) instance.Run();
-                }
-            }
+            taskLibrary.RunTask(name);
         }
 
         private void SayHello()
@@ -54,15 +45,15 @@ namespace TaskRunner
             {
                 Console.WriteLine();
                 Console.WriteLine("The following commands are available: ");
-                foreach(var ti in tasks)
+                foreach(var ti in taskLibrary.Tasks())
                 {
-                    if (ti.Value.HasDescription)
+                    if (ti.HasDescription)
                     {
-                        Console.WriteLine(" - {0} ({1})", ti.Value.Name, ti.Value.Description);
+                        Console.WriteLine(" - {0} ({1})", ti.Name, ti.Description);
                     }
                     else
                     {
-                        Console.WriteLine(" - {0}", ti.Value.Name);
+                        Console.WriteLine(" - {0}", ti.Name);
                     }
                 }
             }
