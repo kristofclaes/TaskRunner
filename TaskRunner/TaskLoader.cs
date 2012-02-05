@@ -14,10 +14,10 @@ namespace TaskRunner
                      select new TaskInformation(t, GetDescription(t))).ToList();
          }
 
-         private string GetDescription(Type type)
+         private TaskDescriptionAttribute GetDescription(Type type)
          {
-             var attributes = type.GetCustomAttributes(true).Where(a => a is TaskDescriptionAttribute).FirstOrDefault() as TaskDescriptionAttribute;
-             return attributes == null ? String.Empty : attributes.Description;
+             var description = type.GetCustomAttributes(true).Where(a => a is TaskDescriptionAttribute).FirstOrDefault() as TaskDescriptionAttribute;
+             return description == null ? new TaskDescriptionAttribute(string.Empty, string.Empty) : description;
          }
     }
 }
