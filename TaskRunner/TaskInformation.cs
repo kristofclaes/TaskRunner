@@ -9,27 +9,27 @@ namespace TaskRunner
         public string Description { get; private set; }
         public string Name { get; private set; }
 
-        public TaskInformation(Type taskType, string description)
+        public TaskInformation(Type taskType, TaskDescriptionAttribute description)
         {
             TaskType = taskType;
-            Description = description;
-            Name = taskType.Name;
+            Description = description.Description;
+            Name = string.IsNullOrEmpty(description.Name) ? string.Concat(taskType.Namespace,".",taskType.Name) : description.Name;
         }
 
         public override string ToString()
         {
-            if(!String.IsNullOrWhiteSpace(Description))
+            if (!String.IsNullOrWhiteSpace(Description))
             {
                 return String.Format("{0} ({1})", Name, Description);
             }
-            
+
             return Name;
         }
 
         public override bool Equals(object obj)
         {
             var other = obj as TaskInformation;
-            if(other == null)
+            if (other == null)
             {
                 return false;
             }
